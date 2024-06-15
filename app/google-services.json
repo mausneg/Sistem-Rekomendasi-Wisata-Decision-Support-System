@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "959527649174",
+    "project_id": "dss-sistem-rekomendasi-wisata",
+    "storage_bucket": "dss-sistem-rekomendasi-wisata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959527649174:android:e85f40c706efa6548027b7",
+        "android_client_info": {
+          "package_name": "com.example.topsis_dss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy34SHufOC4LCknWiskoS8fERblSszJNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
