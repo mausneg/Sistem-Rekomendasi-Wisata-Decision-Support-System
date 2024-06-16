@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".EditProfileActivity"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/backEpro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="46dp"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/text1_Epro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-190dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="205dp"
+        android:layout_height="205dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/profile"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Your profile picture"/>
+
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_picture"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:id="@+id/text2_epro"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:hint="Full name"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/input_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/grey"
+            android:hint="Victoria Robertson"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/black" />
+
+        <TextView
+            android:id="@+id/text3_epro"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:hint="Email"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/grey"
+            android:inputType="textEmailAddress"
+            android:hint="victor.robert9@unram.ac.id"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/black" />
+
+        <TextView
+            android:id="@+id/text4_epro"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:hint="Old Password"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/input_old_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/text5_epro"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:hint="New Password"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/input_new_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/black" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn1_epro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:width="350dp"
+        android:backgroundTint="@color/blue"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</RelativeLayout>
