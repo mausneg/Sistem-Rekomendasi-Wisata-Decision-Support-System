@@ -38,6 +38,11 @@ class RecommendActivity : AppCompatActivity() {
         binding.ivCalculate.setOnClickListener {
             onClickCalculate(json)
         }
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         progressDialog.show()
         lifecycleScope.launch {
             tourismTransformedList = getTourismTransformed()
@@ -101,6 +106,7 @@ class RecommendActivity : AppCompatActivity() {
                 tourismListAdapter = TourismListAdapter(tourismList)
                 binding.tvRecommendTitle.text = "Recommendation"
                 binding.tvRecommendSubtitle.text = "Based on your preference"
+                binding.ivBack.setImageResource(R.drawable.ic_back)
                 binding.ivCalculate.setImageResource(R.drawable.ic_calculate)
                 binding.rvRecommend.layoutManager = LinearLayoutManager(this)
                 binding.rvRecommend.adapter = tourismListAdapter

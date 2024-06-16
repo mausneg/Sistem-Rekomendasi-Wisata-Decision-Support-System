@@ -26,7 +26,9 @@ class CalculateResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCalculateResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
         lifecycleScope.launch {
             getCalculateStep()
         }
