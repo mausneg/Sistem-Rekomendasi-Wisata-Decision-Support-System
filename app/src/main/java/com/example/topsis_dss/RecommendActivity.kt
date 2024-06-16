@@ -1,6 +1,7 @@
 package com.example.topsis_dss
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -34,19 +35,20 @@ class RecommendActivity : AppCompatActivity() {
         val json = intent.getStringExtra("weigth")
         val gson = Gson()
         val weights: Map<String, Int> = gson.fromJson(json, object : TypeToken<Map<String, Int>>() {}.type)
-
+        binding.ivCalculate.setOnClickListener {
+            onClickCalculate(json)
+        }
         progressDialog.show()
         lifecycleScope.launch {
             tourismTransformedList = getTourismTransformed()
             val topsis = Topsis(tourismTransformedList, weights)
             tourismTransformedList = topsis.recommendation
-            Log.d("Recommendation", tourismTransformedList.toString())
             getTourism()
             progressDialog.dismiss()
         }
     }
 
-    private suspend fun getTourismTransformed(): ArrayList<TourismTransformed> = withContext(
+    suspend fun getTourismTransformed(): ArrayList<TourismTransformed> = withContext(
         Dispatchers.IO) {
         val tourismTransformedList = arrayListOf<TourismTransformed>()
         val tourismData = db.collection("tourism_transformed")
@@ -93,9 +95,13 @@ class RecommendActivity : AppCompatActivity() {
                     val tourism = Tourism(id, name, description, city, category, rating_average.toFloat(), rating_count.toInt())
                     tourismList.add(tourism)
                 }
+                tourismList.sortBy { tourism ->
+                    tourismTransformedList.indexOfFirst { it.name == tourism.name }
+                }
                 tourismListAdapter = TourismListAdapter(tourismList)
                 binding.tvRecommendTitle.text = "Recommendation"
                 binding.tvRecommendSubtitle.text = "Based on your preference"
+                binding.ivCalculate.setImageResource(R.drawable.ic_calculate)
                 binding.rvRecommend.layoutManager = LinearLayoutManager(this)
                 binding.rvRecommend.adapter = tourismListAdapter
                 binding.rvRecommend.isNestedScrollingEnabled = false
@@ -105,5 +111,11 @@ class RecommendActivity : AppCompatActivity() {
                 Log.e("FirestoreError", e.message, e)
 
             }
+    }
+
+    private fun onClickCalculate(json: String? ) {
+        val intent = Intent(this, CalculateResultActivity::class.java)
+        intent.putExtra("weigth", json)
+        startActivity(intent)
     }
 }

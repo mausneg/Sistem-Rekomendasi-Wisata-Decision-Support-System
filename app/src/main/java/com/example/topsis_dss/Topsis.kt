@@ -4,18 +4,19 @@ import com.google.gson.Gson
 
 class Topsis(private val tourismList: ArrayList<TourismTransformed>, private val weight: Map<String, Int>) {
     private val gson = Gson()
-    private val criteria =
-        arrayListOf("Price", "Distance", "Popularity", "Transportation", "Facility")
-    private val normalizedMatrix = arrayListOf<ArrayList<Double>>()
-    private val weightedMatrix = arrayListOf<ArrayList<Double>>()
-    private val positiveIdealSolution = arrayListOf<Double>()
-    private val negativeIdealSolution = arrayListOf<Double>()
-    private val distancePositive = arrayListOf<Double>()
-    private val distanceNegative = arrayListOf<Double>()
-    private val closeness = arrayListOf<Double>()
+    private val criteria = arrayListOf("Price", "Distance", "Popularity", "Transportation", "Facility")
+    val unprocessedMatrix = arrayListOf<ArrayList<Double>>()
+    val normalizedMatrix = arrayListOf<ArrayList<Double>>()
+    val weightedMatrix = arrayListOf<ArrayList<Double>>()
+    val positiveIdealSolution = arrayListOf<Double>()
+    val negativeIdealSolution = arrayListOf<Double>()
+    val distancePositive = arrayListOf<Double>()
+    val distanceNegative = arrayListOf<Double>()
+    val closeness = arrayListOf<Double>()
     val recommendation = arrayListOf<TourismTransformed>()
 
     init {
+        unprocessedMatrix()
         normalizeMatrix()
         weightMatrix()
         calculatePositiveIdealSolution()
@@ -26,6 +27,17 @@ class Topsis(private val tourismList: ArrayList<TourismTransformed>, private val
         getRecommendation()
     }
 
+    private fun unprocessedMatrix() {
+        for (i in 0 until tourismList.size) {
+            val row = arrayListOf<Double>()
+            row.add(tourismList[i].price.toDouble())
+            row.add(tourismList[i].distance.toDouble())
+            row.add(tourismList[i].popularity.toDouble())
+            row.add(tourismList[i].transportation.toDouble())
+            row.add(tourismList[i].facility.toDouble())
+            unprocessedMatrix.add(row)
+        }
+    }
     private fun normalizeMatrix() {
         for (i in 0 until tourismList.size) {
             val row = arrayListOf<Double>()
@@ -36,6 +48,7 @@ class Topsis(private val tourismList: ArrayList<TourismTransformed>, private val
             row.add(tourismList[i].facility.toDouble())
             normalizedMatrix.add(row)
         }
+
         for (i in 0 until normalizedMatrix[0].size) {
             var sum = 0.0
             for (j in 0 until normalizedMatrix.size) {
@@ -52,7 +65,7 @@ class Topsis(private val tourismList: ArrayList<TourismTransformed>, private val
         for (i in 0 until normalizedMatrix.size) {
             val row = arrayListOf<Double>()
             for (j in 0 until normalizedMatrix[0].size) {
-                row.add(normalizedMatrix[i][j] * weight[criteria[j]]!!)
+                row.add((normalizedMatrix[i][j] * weight[criteria[j]]!!)/100.0)
             }
             weightedMatrix.add(row)
         }
@@ -131,6 +144,7 @@ class Topsis(private val tourismList: ArrayList<TourismTransformed>, private val
         val sortedCloseness = closeness.sortedDescending()
         for (i in 0 until 10) {
             val index = closeness.indexOf(sortedCloseness[i])
+            tourismList[index].score = sortedCloseness[i]
             recommendation.add(tourismList[index])
         }
     }

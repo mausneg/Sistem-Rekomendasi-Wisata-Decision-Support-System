@@ -11,6 +11,7 @@ data class TourismTransformed(
     val facility: Int,
     val popularity: Float,
     val price: Int,
-    val transportation: Int
+    val transportation: Int,
+    var score: Double = 0.0
 
 ): Parcelable
