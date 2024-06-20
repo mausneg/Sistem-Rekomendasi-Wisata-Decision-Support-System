@@ -19,6 +19,7 @@ class TourismDetail : AppCompatActivity() {
         binding.tourismRatingCount.text = tourism?.rating_count.toString()
         binding.tourismCategory.text = tourism?.category.toString()
         binding.tourismCity.text = tourism?.city
+        binding.tourismPrice.text = tourism?.price.toString()
         Glide.with(this)
             .load("https://via.placeholder.com/100")
             .into(binding.tourismImage)

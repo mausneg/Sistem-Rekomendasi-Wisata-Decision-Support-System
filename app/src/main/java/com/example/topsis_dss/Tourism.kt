@@ -11,6 +11,7 @@ data class Tourism(
     val city: String,
     val category: ArrayList<String>,
     val rating_avarage: Float,
-    val rating_count: Int
+    val rating_count: Int,
+    val price: Float
 
 ): Parcelable

@@ -175,8 +175,8 @@ class PrefrenceFragment : Fragment() {
 
     private fun getSpinnerValuesWithWeights(): Map<String, Int> {
         val weights = mapOf(
-            0 to 40,
-            1 to 25,
+            0 to 35,
+            1 to 30,
             2 to 20,
             3 to 10,
             4 to 5)
