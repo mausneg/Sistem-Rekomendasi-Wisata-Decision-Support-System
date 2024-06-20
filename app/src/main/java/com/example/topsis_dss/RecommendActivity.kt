@@ -94,10 +94,18 @@ class RecommendActivity : AppCompatActivity() {
                     val category = ArrayList(category_string.split(","))
                     val city = document.data["City"] as String
                     val description = document.data["Description"] as String
-                    val rating_average = document.data["Rating"] as Double
+                    var rating_average: Float
+                    if (document.data["Rating"] is Long) {
+                        rating_average = (document.data["Rating"] as Long).toFloat()
+                    } else if (document.data["Rating"] is Double) {
+                        rating_average = (document.data["Rating"] as Double).toFloat()
+                    } else {
+                        throw IllegalArgumentException("Invalid type for Rating")
+                    }
                     val rating_count = document.data["Rating_Count"] as Long
+                    val price = document.data["Price"] as Long
 
-                    val tourism = Tourism(id, name, description, city, category, rating_average.toFloat(), rating_count.toInt())
+                    val tourism = Tourism(id, name, description, city, category, rating_average.toFloat(), rating_count.toInt(), price.toFloat())
                     tourismList.add(tourism)
                 }
                 tourismList.sortBy { tourism ->
